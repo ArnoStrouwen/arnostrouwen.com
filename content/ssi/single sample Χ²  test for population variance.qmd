@@ -1,0 +1,336 @@
+---
+draft: false
+title: single sample χ²  test for population variance
+date: 2024-01-01
+lastmod: 2025-01-01
+engine: julia
+---
+Based on:
+Handbook of Parametric and Nonparametric Statistical Procedures, 5th edition, Chapter 3
+```{julia}
+#| echo: false
+#| output: false
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+```
+```{julia}
+#| output: false
+using Random
+Random.seed!(783376894512)
+using Distributions
+using Intervals
+using Plots
+n_sim = 1_000_000 # number of simulations to verify theoretical distributions
+```
+## True model
+```{julia}
+#| output: false
+n = 4
+σₜ = 2.0
+μₜ = 3.0
+Mₜ = Product([Normal(μₜ, σₜ) for _ in 1:n]) # assumed known to be Normal and i.i.d.
+generate_data(Mₜ) = rand(Mₜ)
+```
+## Hypothesis testing
+```{julia}
+#| output: false
+function test_statistic(y, σ₀)
+    n = length(y)
+    μ̂ = sum(y) / n
+    σ̂² = sum((y .- μ̂) .^ 2) / (n - 1)
+    return σ̂² / (σ₀^2 / (n - 1))
+end
+```
+### Null Hypothesis is true
+```{julia}
+#| output: false
+σ₀ = 2.0
+σₜ == σ₀
+
+simulated_statistics = [test_statistic(generate_data(Mₜ), σ₀) for _ in 1:n_sim]
+distribution_under_H₀ = χ² -> pdf(Chisq(n - 1), χ²)
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+χmin = mean(simulated_statistics) -3*std(simulated_statistics)
+χmax = mean(simulated_statistics) +3*std(simulated_statistics)
+χ_plot = χmin:((χmax - χmin) / 1000):χmax
+plot!(distribution_under_H₀, χ_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of Χ² test statistic for a pop. var., \n when Null Hypothesis is correct",
+    xlimits=(χmin, χmax),
+    xlabel="χ",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+### Null Hypothesis is true, but assumptions don't hold
+#### Observations are non-normal
+```{julia}
+#| output: false
+M_non_normal =  Product([MixtureModel([Normal(μₜ+sqrt(3.99), 0.1),
+                                       Normal(μₜ-sqrt(3.99), 0.1),], [0.5, 0.5]) for _ in 1:n])
+all(mean(M_non_normal) .== μₜ)
+all(sqrt.(var(M_non_normal)) .≈ σₜ)
+
+simulated_statistics = [test_statistic(generate_data(M_non_normal), σ₀) for _ in 1:n_sim]
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+χmin = mean(simulated_statistics) -3*std(simulated_statistics)
+χmax = mean(simulated_statistics) +3*std(simulated_statistics)
+χ_plot = χmin:((χmax - χmin) / 1000):χmax
+plot!(distribution_under_H₀, χ_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of Χ² test statistic for a pop. var., \n under H₀, but non-normal observations",
+    xlimits=(χmin, χmax),
+    xlabel="χ",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+#### Observations are non-independent
+```{julia}
+#| output: false
+M_non_independent = MvNormal([μₜ, μₜ, μₜ, μₜ, μₜ], [σₜ^2 0.9*σₜ^2 0 0 0;
+                                                0.9*σₜ^2 σₜ^2 0 0 0;
+                                                0 0 σₜ^2 0 0;
+                                                0 0 0 σₜ^2 0;
+                                                0 0 0 0 σₜ^2])
+
+all(sqrt.(var(M_non_independent)) .≈ σₜ)
+
+simulated_statistics = [test_statistic(generate_data(M_non_independent), σ₀) for _ in 1:n_sim]
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+χmin = mean(simulated_statistics) -3*std(simulated_statistics)
+χmax = mean(simulated_statistics) +3*std(simulated_statistics)
+χ_plot = χmin:((χmax - χmin) / 1000):χmax
+plot!(distribution_under_H₀, χ_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of Χ² test statistic for a pop. var., \n under H₀, but non-independent observations",
+    xlimits=(χmin, χmax),
+    xlabel="χ",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+#### Observations are non-identical
+The only way to create non-identical observations, while keeping the other assumptions, is to vary the mean.
+```{julia}
+#| output: false
+M_non_identical = Product([Normal(i*μₜ, σₜ) for i in 1:n])
+any(mean(M_non_identical) .!= μₜ)
+all(sqrt.(var(M_non_identical)) .≈ σₜ)
+
+simulated_statistics = [test_statistic(generate_data(M_non_identical), σ₀) for _ in 1:n_sim]
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+χmin = mean(simulated_statistics) -3*std(simulated_statistics)
+χmax = mean(simulated_statistics) +3*std(simulated_statistics)
+χ_plot = χmin:((χmax - χmin) / 1000):χmax
+plot!(distribution_under_H₀, χ_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of Χ² test statistic for a pop. var., \n under H₀, but non-identical observations",
+    xlimits=(χmin, χmax),
+    xlabel="χ",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+### Null Hypothesis is false
+```{julia}
+#| output: false
+σ₀ = 3.0
+σₜ != σ₀
+
+simulated_statistics = [test_statistic(generate_data(Mₜ), σ₀) for _ in 1:n_sim]
+distribution_under_H₁ = χnc -> pdf(Chisq(n - 1) * σₜ^2 / σ₀^2, χnc)
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+χmin = mean(simulated_statistics) -3*std(simulated_statistics)
+χmax = mean(simulated_statistics) +3*std(simulated_statistics)
+χ_plot = χmin:((χmax - χmin) / 1000):χmax
+plot!(distribution_under_H₁, χ_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of Χ² test statistic for a pop. var., \n when Null Hypothesis is incorrect",
+    xlimits=(χmin, χmax),
+    xlabel="χ",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+### Null Hypothesis is false, but assumptions don't hold
+Same counter examples as above.
+```{julia}
+#| code-fold: true
+simulated_statistics = [test_statistic(generate_data(M_non_normal), σ₀) for _ in 1:n_sim]
+
+histogram(simulated_statistics; normalize=true, label="Simulated")
+χmin = mean(simulated_statistics) -3*std(simulated_statistics)
+χmax = mean(simulated_statistics) +3*std(simulated_statistics)
+χ_plot = χmin:((χmax - χmin) / 1000):χmax
+plot!(distribution_under_H₁, χ_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of Χ² test statistic for a pop. var., \n under H₁, but non-normal observations",
+    xlimits=(χmin, χmax),
+    xlabel="χ",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+```{julia}
+#| code-fold: true
+simulated_statistics = [test_statistic(generate_data(M_non_independent), σ₀) for _ in 1:n_sim]
+histogram(simulated_statistics; normalize=true, label="Simulated")
+χmin = mean(simulated_statistics) -3*std(simulated_statistics)
+χmax = mean(simulated_statistics) +3*std(simulated_statistics)
+χ_plot = χmin:((χmax - χmin) / 1000):χmax
+plot!(distribution_under_H₁, χ_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of Χ² test statistic for a pop. var., \n under H₁, but non-independent observations",
+    xlimits=(χmin, χmax),
+    xlabel="χ",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+```{julia}
+#| code-fold: true
+simulated_statistics = [test_statistic(generate_data(M_non_identical), σ₀) for _ in 1:n_sim]
+
+histogram(simulated_statistics; normalize=true, label="Simulated")
+χmin = mean(simulated_statistics) -3*std(simulated_statistics)
+χmax = mean(simulated_statistics) +3*std(simulated_statistics)
+χ_plot = χmin:((χmax - χmin) / 1000):χmax
+plot!(distribution_under_H₁, χ_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of Χ² test statistic for a pop. var., \n under H₁, but non-identical observations",
+    xlimits=(χmin, χmax),
+    xlabel="χ",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+# Confidence Interval
+```{julia}
+#| output: false
+α = 0.05 # proportion of CIs which should fail to cover true values
+function confidence_interval(y, α)
+    n = length(y)
+    μ̂ = sum(y) / n
+    σ̂² = sum((y .- μ̂) .^ 2) / (n - 1)
+    L = (n - 1) * σ̂² / quantile(Chisq(n - 1), 1 - α / 2)
+    U = (n - 1) * σ̂² / quantile(Chisq(n - 1), α / 2)
+    return Interval(L, U)
+end
+```
+```{julia}
+#| output: false
+simulated_CIs = [confidence_interval(generate_data(Mₜ), α) for _ in 1:n_sim]
+coverage = count([σₜ^2 in CI for CI in simulated_CIs]) / n_sim
+```
+```{julia}
+#| code-fold: true
+bar(["inside CI", "outside CI"], [coverage, 1 - coverage])
+plot!(;
+    title="Simulated Coverage of 95% confidence interval \n corresponding to Χ² test statistic for a pop. var.",
+    ylimits=(0.0, 1.0),
+    yticks=[0.05, 0.95],
+    ylabel="proportion",
+    grid=true,
+    legend=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+## assumptions don't hold
+Same counter examples as above.
+```{julia}
+#| code-fold: true
+simulated_CIs = [confidence_interval(generate_data(M_non_normal), α) for _ in 1:n_sim]
+coverage = count([σₜ^2 in CI for CI in simulated_CIs]) / n_sim
+bar(["inside CI", "outside CI"], [coverage, 1 - coverage])
+plot!(;
+    title="Simulated Coverage of 95% confidence interval \n corresponding to Χ² test statistic for a pop. var. \n but non-normal observations",
+    ylimits=(0.0, 1.0),
+    yticks=[0.05, 0.95],
+    ylabel="proportion",
+    grid=true,
+    legend=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+    #top_margin = 25Plots.px,
+)
+```
+```{julia}
+#| code-fold: true
+simulated_CIs = [confidence_interval(generate_data(M_non_independent), α) for _ in 1:n_sim]
+coverage = count([σₜ^2 in CI for CI in simulated_CIs]) / n_sim
+
+bar(["inside CI", "outside CI"], [coverage, 1 - coverage])
+plot!(;
+    title="Simulated Coverage of 95% confidence interval \n corresponding to Χ² test statistic for a pop. var. \n but non-independent observations",
+    ylimits=(0.0, 1.0),
+    yticks=[0.05, 0.95],
+    ylabel="proportion",
+    grid=true,
+    legend=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+```{julia}
+#| code-fold: true
+simulated_CIs = [confidence_interval(generate_data(M_non_identical), α) for _ in 1:n_sim]
+coverage = count([σₜ^2 in CI for CI in simulated_CIs]) / n_sim
+
+bar(["inside CI", "outside CI"], [coverage, 1 - coverage])
+plot!(;
+    title="Simulated Coverage of 95% confidence interval \n corresponding to Χ² test statistic for a pop. var. \n but non-identical observations",
+    ylimits=(0.0, 1.0),
+    yticks=[0.05, 0.95],
+    ylabel="proportion",
+    grid=true,
+    legend=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```

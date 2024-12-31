@@ -10,7 +10,7 @@ Often, researchers will perform experiments and only  talk to a statistician aft
 But statisticians are not only useful for data analysis.
 Much time and effort can be saved by carefully planning an experiment.
 Every measurement setup has its own unique details.
-I help other researchers by constructing optimal experiments, custom made for their own measurement setup, goals and budgetary constraints.
+I help other researchers by constructing optimal experiments, custom made for their own measurement setup, goals, and budgetary constraints.
 
 Much of my expertise in experimental design, I developed during my Research Foundation Flanders (FWO) PhD fellowship at the KULeuven. 
 There, I designed experiments to precisely characterize the respiration and fermentation of fruit and vegetables, leading to better storage solutions.

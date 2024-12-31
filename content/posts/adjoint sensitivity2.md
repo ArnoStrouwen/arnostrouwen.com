@@ -2,10 +2,11 @@
 draft: false
 title: Notes on adjoint sensitivity analysis of dynamic systems part 2
 date: 2022-04-30
-lastmod: 2022-04-30
+lastmod: 2025-01-01
 ---
 {{< katex >}}
 We continue from [part 1]({{< ref "adjoint sensitivity" >}}) with a more rigorous version of the derivation of adjoint sensitivity analysis for continuous time systems,
+<!--more-->
 $$\begin{align*}
     u(0) &= f_0(p)\\\\
     u(t) &= u(0) + \int_0^{t} f(u(q),p,q)dq\\\\
@@ -15,7 +16,7 @@ $$\begin{align*}
 \\(u(t)\\) is the dynamic state, which evolution in time is described by the function \\(f\\).
 \\(c(t)\\) is the cost at time \\(t\\) described by the function \\(g\\) and \\(G\\) is the total accumulated cost.
 Both \\(g\\) and \\(f\\) are dependent on the parameters \\(p\\) and the time \\(t\\). We want to calculate the effect \\(p\\) has on \\(G\\) using backpropagation.
-<!--more-->
+
 Let us assume that we have already pulled back from time \\(t_e\\) to time \\(t\\).
 We reparametrize \\(G\\) in terms of \\(p\\), \\(u(t)\\) and \\(c_{[0,t]}\\), which is the cost function restricted to the interval \\([0,t]\\),
 $$\begin{align*}
