@@ -2,7 +2,7 @@
 draft: false
 title: Notes on adjoint sensitivity analysis of dynamic systems part 1
 date: 2022-01-31
-lastmod: 2022-04-30
+lastmod: 2025-01-01
 ---
 {{< katex >}}
 Gradients are useful for efficient parameter estimation and optimal control of dynamic systems.
@@ -178,7 +178,7 @@ $$\begin{align*}
 	\frac{d\phi}{dt}  &= -\lambda \frac{\partial f^c}{\partial p} - \frac{\partial g^c}{\partial p}.
 \end{align*}$$
 
-These are the same equations you find in the documentation of DifferentialEquations.jl [[4]](https://diffeq.sciml.ai/latest/extras/sensitivity_math/).
+These are the same equations you find in the documentation of DifferentialEquations.jl [[4]](https://docs.sciml.ai/SciMLSensitivity/stable/sensitivity_math/).
 This, however, only gives us an intuition behind the equations for continuous time systems.
 In [part 2]({{< ref "adjoint sensitivity2" >}}) we will see if a more rigorous version of this argument can be made for continuous time systems.
 # References
