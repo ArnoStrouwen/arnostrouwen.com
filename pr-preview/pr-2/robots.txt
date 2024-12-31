@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-2/sitemap.xml
