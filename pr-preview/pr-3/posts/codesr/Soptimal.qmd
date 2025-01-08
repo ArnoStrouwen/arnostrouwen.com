@@ -112,7 +112,7 @@ plot!(tickfontsize=12, guidefontsize=14, legendfontsize=8, grid=false)
 ```
 We see that none of the suggested model structures approximate the true model
 well in the area between 0 and 2.5, while between 2.5 and 10 the models agree.
-In this case it is thus probably a good idea to gather more data for small \\(x\\).
+In this case it is thus probably a good idea to gather more data for small \\((x\\)).
 Can we formalize this in mathematical terms?
 We will do this by creating a variant of
 [T-optimal designs](https://academic.oup.com/biomet/article-abstract/62/2/289/337065).
@@ -146,7 +146,7 @@ The average over the pairwise model comparisons could be replaced with the minim
 This would lead to a max-min-max strategy instead of a max-expected-max strategy.
 In my experiments this did not work well
 when two of the suggested model structures are very similar or identical.
-This often occurs because of terms like \\(sin(x-x)\\) being present in symbolic regression.
+This often occurs because of terms like \\((sin(x-x)\\)) being present in symbolic regression.
 Punishing for complexity might remedy this.
 :::
 
@@ -245,6 +245,6 @@ Et voilà, we found the correct model structure,
 with only 3 new observations!
 
 :::{.callout-note}
-In fact we found it multiple times, with expressions like \\(sin(x-x)\\).
+In fact we found it multiple times, with expressions like \\((sin(x-x)\\)).
 Again, punishing for needless complexity would be of added value here.
 :::
