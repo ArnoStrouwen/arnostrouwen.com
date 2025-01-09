@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Strouwen Statistics</title>
+    <link>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/</link>
+    <description>Recent content on Strouwen Statistics</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 01 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Single sample T test</title>
+      <link>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/single-sample-t-test/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/single-sample-t-test/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Single sample Z test</title>
+      <link>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/single-sample-z-test/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/single-sample-z-test/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>single sample χ²  test for population variance</title>
+      <link>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/single-sample-%CF%87--test-for-population-variance/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/single-sample-%CF%87--test-for-population-variance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Two independent samples T test</title>
+      <link>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/two-independent-samples-t-test/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-4/ssi/two-independent-samples-t-test/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
