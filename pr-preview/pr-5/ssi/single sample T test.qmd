@@ -1,0 +1,338 @@
+---
+draft: false
+title: Single sample T test
+date: 2024-01-01
+lastmod: 2025-01-01
+engine: julia
+---
+Based on:
+Handbook of Parametric and Nonparametric Statistical Procedures, 5th edition, Chapter 2
+```{julia}
+#| echo: false
+#| output: false
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+```
+```{julia}
+#| output: false
+using Random
+Random.seed!(783376894512)
+using Distributions
+using Intervals
+using Plots
+n_sim = 1_000_000 # number of simulations to verify theoretical distributions
+```
+## True model
+```{julia}
+#| output: false
+n = 4
+σₜ = 2.0
+μₜ = 3.0
+Mₜ = Product([Normal(μₜ, σₜ) for _ in 1:n]) # assumed known to be Normal and i.i.d.
+generate_data(Mₜ) = rand(Mₜ)
+```
+## Hypothesis testing
+```{julia}
+#| output: false
+function test_statistic(y, μ₀)
+    n = length(y)
+    μ̂ = sum(y) / n
+    σ̂² = sum((y .- μ̂) .^ 2) / (n - 1)
+    return (μ̂ - μ₀) / √(σ̂² / n)
+end
+```
+### Null Hypothesis is true
+```{julia}
+#| output: false
+μ₀ = 3.0
+μₜ == μ₀
+
+simulated_statistics = [test_statistic(generate_data(Mₜ), μ₀) for _ in 1:n_sim]
+distribution_under_H₀ = t -> pdf(TDist(n - 1), t)
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+tmin = mean(simulated_statistics) -3*std(simulated_statistics)
+tmax = mean(simulated_statistics) +3*std(simulated_statistics)
+t_plot = tmin:((tmax - tmin) / 1000):tmax
+plot!(distribution_under_H₀, t_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of single sample T test statistic, \n when Null Hypothesis is correct",
+    xlimits=(tmin, tmax),
+    xlabel="t",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+### Null Hypothesis is true, but assumptions don't hold
+#### Observations are non-normal
+```{julia}
+#| output: false
+M_non_normal =  Product([MixtureModel([Normal(μₜ+sqrt(3.99), 0.1),
+                                       Normal(μₜ-sqrt(3.99), 0.1),], [0.5, 0.5]) for _ in 1:n])
+all(mean(M_non_normal) .== μₜ)
+all(sqrt.(var(M_non_normal)) .≈ σₜ)
+
+simulated_statistics = [test_statistic(generate_data(M_non_normal), μ₀) for _ in 1:n_sim]
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+tmin = mean(simulated_statistics) -3*std(simulated_statistics)
+tmax = mean(simulated_statistics) +3*std(simulated_statistics)
+t_plot = tmin:((tmax - tmin) / 1000):tmax
+plot!(distribution_under_H₀, t_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of single sample T test statistic, \n under H₀, but non-normal observations",
+    xlimits=(tmin, tmax),
+    xlabel="t",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+#### Observations are non-independent
+```{julia}
+#| output: false
+M_non_independent = MvNormal([μₜ, μₜ, μₜ, μₜ, μₜ], [σₜ^2 0.5*σₜ^2 0 0 0;
+                                                0.5*σₜ^2 σₜ^2 0 0 0;
+                                                0 0 σₜ^2 0 0;
+                                                0 0 0 σₜ^2 0;
+                                                0 0 0 0 σₜ^2])
+all(mean(M_non_independent) .== μₜ)
+
+simulated_statistics = [test_statistic(generate_data(M_non_independent), μ₀) for _ in 1:n_sim]
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+tmin = mean(simulated_statistics) -3*std(simulated_statistics)
+tmax = mean(simulated_statistics) +3*std(simulated_statistics)
+t_plot = tmin:((tmax - tmin) / 1000):tmax
+plot!(distribution_under_H₀, t_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of single sample T test statistic, \n under H₀, but non-independent observations",
+    xlimits=(tmin, tmax),
+    xlabel="t",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+#### Observations are non-identical
+```{julia}
+#| output: false
+M_non_identical = Product([Normal(μₜ, i*σₜ) for i in 1:n])
+all(mean(M_non_identical) .== μₜ)
+
+simulated_statistics = [test_statistic(generate_data(M_non_identical), μ₀) for _ in 1:n_sim]
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+tmin = mean(simulated_statistics) -3*std(simulated_statistics)
+tmax = mean(simulated_statistics) +3*std(simulated_statistics)
+t_plot = tmin:((tmax - tmin) / 1000):tmax
+plot!(distribution_under_H₀, t_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of single sample T test statistic, \n under H₀, but non-identical observations",
+    xlimits=(tmin, tmax),
+    xlabel="t",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+### Null Hypothesis is false
+```{julia}
+#| output: false
+μ₀ = 5.0
+μₜ != μ₀
+
+simulated_statistics = [test_statistic(generate_data(Mₜ), μ₀) for _ in 1:n_sim]
+distribution_under_H₁ = tnc -> pdf(NoncentralT(n - 1, (μₜ - μ₀) / √(σₜ^2 / n)), tnc)
+```
+```{julia}
+#| code-fold: true
+histogram(simulated_statistics; normalize=true, label="Simulated")
+tmin = mean(simulated_statistics) -3*std(simulated_statistics)
+tmax = mean(simulated_statistics) +3*std(simulated_statistics)
+t_plot = tmin:((tmax - tmin) / 1000):tmax
+plot!(distribution_under_H₁, t_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of single sample T test statistic, \n when Null Hypothesis is incorrect",
+    xlimits=(tmin, tmax),
+    xlabel="t",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+### Null Hypothesis is false, but assumptions don't hold
+Same counter examples as above.
+```{julia}
+#| code-fold: true
+#| output: false
+simulated_statistics = [test_statistic(generate_data(M_non_normal), μ₀) for _ in 1:n_sim]
+
+histogram(simulated_statistics; normalize=true, label="Simulated")
+tmin = mean(simulated_statistics) -3*std(simulated_statistics)
+tmax = mean(simulated_statistics) +3*std(simulated_statistics)
+t_plot = tmin:((tmax - tmin) / 1000):tmax
+plot!(distribution_under_H₁, t_plot; lw=5, label="Theoretical")
+```
+```{julia}
+#| code-fold: true
+plot!(;
+    title="Distribution of single sample T test statistic, \n under H₁, but non-normal observations",
+    xlimits=(tmin, tmax),
+    xlabel="t",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+```{julia}
+#| code-fold: true
+simulated_statistics = [test_statistic(generate_data(M_non_independent), μ₀) for _ in 1:n_sim]
+
+histogram(simulated_statistics; normalize=true, label="Simulated")
+tmin = mean(simulated_statistics) -3*std(simulated_statistics)
+tmax = mean(simulated_statistics) +3*std(simulated_statistics)
+t_plot = tmin:((tmax - tmin) / 1000):tmax
+plot!(distribution_under_H₁, t_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of single sample T test statistic, \n under H₁, but non-independent observations",
+    xlimits=(tmin, tmax),
+    xlabel="t",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+```{julia}
+#| code-fold: true
+simulated_statistics = [test_statistic(generate_data(M_non_identical), μ₀) for _ in 1:n_sim]
+
+histogram(simulated_statistics; normalize=true, label="Simulated")
+tmin = mean(simulated_statistics) -3*std(simulated_statistics)
+tmax = mean(simulated_statistics) +3*std(simulated_statistics)
+t_plot = tmin:((tmax - tmin) / 1000):tmax
+plot!(distribution_under_H₁, t_plot; lw=5, label="Theoretical")
+plot!(;
+    title="Distribution of single sample T test statistic, \n under H₁, but non-identical observations",
+    xlimits=(tmin, tmax),
+    xlabel="t",
+    ylabel="pdf",
+    grid=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+# Confidence Interval
+```{julia}
+#| output: false
+α = 0.05 # proportion of CIs which should fail to cover true values
+function confidence_interval(y, α)
+    n = length(y)
+    μ̂ = sum(y) / n
+    σ̂² = sum((y .- μ̂) .^ 2) / (n - 1)
+    L = μ̂ + quantile(TDist(n - 1), α / 2) * (√(σ̂² / n))
+    U = μ̂ + quantile(TDist(n - 1), 1 - α / 2) * (√(σ̂² / n))
+    return Interval(L, U)
+end
+```
+```{julia}
+#| output: false
+simulated_CIs = [confidence_interval(generate_data(Mₜ), α) for _ in 1:n_sim]
+coverage = count([μₜ in CI for CI in simulated_CIs]) / n_sim
+```
+```{julia}
+#| code-fold: true
+bar(["inside CI", "outside CI"], [coverage, 1 - coverage])
+plot!(;
+    title="Simulated Coverage of 95% confidence interval \n corresponding to single sample T test",
+    ylimits=(0.0, 1.0),
+    yticks=[0.05, 0.95],
+    ylabel="proportion",
+    grid=true,
+    legend=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+## assumptions don't hold
+Same counter examples as above.
+```{julia}
+#| code-fold: true
+simulated_CIs = [confidence_interval(generate_data(M_non_normal), α) for _ in 1:n_sim]
+coverage = count([μₜ in CI for CI in simulated_CIs]) / n_sim
+bar(["inside CI", "outside CI"], [coverage, 1 - coverage])
+plot!(;
+    title="Simulated Coverage of 95% confidence interval \n corresponding to single sample T test \n but non-normal observations",
+    ylimits=(0.0, 1.0),
+    yticks=[0.05, 0.95],
+    ylabel="proportion",
+    grid=true,
+    legend=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+    #top_margin = 25Plots.px,
+)
+```
+```{julia}
+#| code-fold: true
+simulated_CIs = [confidence_interval(generate_data(M_non_independent), α) for _ in 1:n_sim]
+coverage = count([μₜ in CI for CI in simulated_CIs]) / n_sim
+
+bar(["inside CI", "outside CI"], [coverage, 1 - coverage])
+plot!(;
+    title="Simulated Coverage of 95% confidence interval \n corresponding to single sample T test \n but non-independent observations",
+    ylimits=(0.0, 1.0),
+    yticks=[0.05, 0.95],
+    ylabel="proportion",
+    grid=true,
+    legend=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
+```{julia}
+#| code-fold: true
+simulated_CIs = [confidence_interval(generate_data(M_non_identical), α) for _ in 1:n_sim]
+coverage = count([μₜ in CI for CI in simulated_CIs]) / n_sim
+
+bar(["inside CI", "outside CI"], [coverage, 1 - coverage])
+plot!(;
+    title="Simulated Coverage of 95% confidence interval \n corresponding to single sample T test \n but non-identical observations",
+    ylimits=(0.0, 1.0),
+    yticks=[0.05, 0.95],
+    ylabel="proportion",
+    grid=true,
+    legend=false,
+    legendfontsize=12,
+    tickfontsize=12,
+    guidefontsize=16,
+)
+```
