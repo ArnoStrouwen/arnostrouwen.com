@@ -26,7 +26,7 @@
   
   <script
     type="text/javascript"
-    src="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
+    src="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/js/appearance.min.8a082f81b27f3cb2ee528df0b0bdc39787034cf2cc34d4669fbc9977c929023c.js"
     integrity="sha256-iggvgbJ/PLLuUo3wsL3Dl4cDTPLMNNRmn7yZd8kpAjw="
   ></script>
   
@@ -42,7 +42,7 @@
   <link
     type="text/css"
     rel="stylesheet"
-    href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/css/main.bundle.min.0a40efa574f68fe3647a52c488f20943b400905792daa187828292678c2bbbe7.css"
+    href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/css/main.bundle.min.0a40efa574f68fe3647a52c488f20943b400905792daa187828292678c2bbbe7.css"
     integrity="sha256-CkDvpXT2j&#43;NkelLEiPIJQ7QAkFeS2qGHgoKSZ4wru&#43;c="
   />
   
@@ -63,7 +63,7 @@
       defer
       type="text/javascript"
       id="script-bundle"
-      src="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/js/main.bundle.min.a83fbb8582177ca1299b6eb0170cc50a07758d9720519960ecd42a9a53e43135.js"
+      src="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/js/main.bundle.min.a83fbb8582177ca1299b6eb0170cc50a07758d9720519960ecd42a9a53e43135.js"
       integrity="sha256-qD&#43;7hYIXfKEpm26wFwzFCgd1jZcgUZlg7NQqmlPkMTU="
       data-copy="Copy"
       data-copied="Copied"
@@ -92,23 +92,23 @@ The goal of this blog post is to gain some intuition about these equations by de
   
   
   
-    <link rel="canonical" href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/posts/adjoint-sensitivity/" />
+    <link rel="canonical" href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/posts/adjoint-sensitivity/" />
   
   
   
-    <link rel="apple-touch-icon" sizes="180x180" href="/websiteplayground/pr-preview/pr-5/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/websiteplayground/pr-preview/pr-5/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/websiteplayground/pr-preview/pr-5/favicon-16x16.png" />
-    <link rel="manifest" href="/websiteplayground/pr-preview/pr-5/site.webmanifest" />
-  
-  
-  
-  
+    <link rel="apple-touch-icon" sizes="180x180" href="/arnostrouwen.com/pr-preview/pr-5/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/arnostrouwen.com/pr-preview/pr-5/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/arnostrouwen.com/pr-preview/pr-5/favicon-16x16.png" />
+    <link rel="manifest" href="/arnostrouwen.com/pr-preview/pr-5/site.webmanifest" />
   
   
   
   
-  <meta property="og:url" content="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/posts/adjoint-sensitivity/">
+  
+  
+  
+  
+  <meta property="og:url" content="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/posts/adjoint-sensitivity/">
   <meta property="og:site_name" content="Strouwen Statistics">
   <meta property="og:title" content="Notes on adjoint sensitivity analysis of dynamic systems part 1">
   <meta property="og:description" content="Gradients are useful for efficient parameter estimation and optimal control of dynamic systems. Calculating these gradients requires sensitivity analysis. Sensitivity analysis for dynamic systems comes in two flavors, forward mode and adjoint (reverse). For systems with a large number of parameters adjoint sensitivity analysis is often more efficient [1]. I find that the traditional way of deriving adjoints for ordinary differential equations, such as [3], leaves me with little intuition what these equations represent. The goal of this blog post is to gain some intuition about these equations by deriving the adjoint equations in a different way.">
@@ -134,7 +134,7 @@ The goal of this blog post is to gain some intuition about these equations by de
     
     "abstract": "\u003cp\u003e\n\nGradients are useful for efficient parameter estimation and optimal control of dynamic systems.\nCalculating these gradients requires sensitivity analysis.\nSensitivity analysis for dynamic systems comes in two flavors, forward mode and adjoint (reverse).\nFor systems with a large number of parameters adjoint sensitivity analysis is often more efficient\n\u003ca href=\u0022https:\/\/ieeexplore.ieee.org\/abstract\/document\/9622796\u0022 target=\u0022_blank\u0022 rel=\u0022noreferrer\u0022\u003e[1]\u003c\/a\u003e.\nI find that the traditional way of deriving adjoints for ordinary differential equations, such as\n\u003ca href=\u0022https:\/\/book.sciml.ai\/notes\/11-Differentiable_Programming_and_Neural_Differential_Equations\/\u0022 target=\u0022_blank\u0022 rel=\u0022noreferrer\u0022\u003e[3]\u003c\/a\u003e,\nleaves me with little intuition what these equations represent.\nThe goal of this blog post is to gain some intuition about these equations by deriving the adjoint equations in a different way.\u003c\/p\u003e",
     "inLanguage": "en",
-    "url" : "https:\/\/arnostrouwen.github.io\/websiteplayground\/pr-preview\/pr-5\/posts\/adjoint-sensitivity\/",
+    "url" : "https:\/\/arnostrouwen.github.io\/arnostrouwen.com\/pr-preview\/pr-5\/posts\/adjoint-sensitivity\/",
     "author" : {
       "@type": "Person",
       "name": "Arno Strouwen"
@@ -159,13 +159,13 @@ The goal of this blog post is to gain some intuition about these equations by de
    "itemListElement": [
      {
        "@type": "ListItem",
-       "item": "https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/",
+       "item": "https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/",
        "name": "",
        "position": 1
      },
      {
        "@type": "ListItem",
-       "item": "https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/posts/",
+       "item": "https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/posts/",
        "name": "",
        "position": 2
      },
@@ -204,17 +204,17 @@ The goal of this blog post is to gain some intuition about these equations by de
   <link
     type="text/css"
     rel="stylesheet"
-    href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/lib/katex/katex.min.19095127357ed6d29fe0a63a6b000c913a89f7f1963b765dd3715e97c9852e75.css"
+    href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/lib/katex/katex.min.19095127357ed6d29fe0a63a6b000c913a89f7f1963b765dd3715e97c9852e75.css"
     integrity="sha256-GQlRJzV&#43;1tKf4KY6awAMkTqJ9/GWO3Zd03Fel8mFLnU="
   />
   
   
-  <script defer src="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/lib/katex/katex.min.e8d885505949f3a5f4abdd5dd0d53696bd1371ad26ffbf4f310dcd77c8cdae89.js" integrity="sha256-6NiFUFlJ86X0q91d0NU2lr0Tca0m/79PMQ3Nd8jNrok="></script>
+  <script defer src="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/lib/katex/katex.min.e8d885505949f3a5f4abdd5dd0d53696bd1371ad26ffbf4f310dcd77c8cdae89.js" integrity="sha256-6NiFUFlJ86X0q91d0NU2lr0Tca0m/79PMQ3Nd8jNrok="></script>
   
   
   <script
     defer
-    src="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/lib/katex/auto-render.min.bb53eb953394531aae36fdd537065c4244eb8542901a3ce914601d932675b8ac.js"
+    src="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/lib/katex/auto-render.min.bb53eb953394531aae36fdd537065c4244eb8542901a3ce914601d932675b8ac.js"
     integrity="sha256-u1PrlTOUUxquNv3VNwZcQkTrhUKQGjzpFGAdkyZ1uKw="
     onload="renderMathInElement(document.body);"
   ></script>
@@ -374,7 +374,7 @@ The goal of this blog post is to gain some intuition about these equations by de
   <a
     class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2"
     rel="me"
-    href="/websiteplayground/pr-preview/pr-5/"
+    href="/arnostrouwen.com/pr-preview/pr-5/"
     >Strouwen Statistics</a
   >
 
@@ -388,7 +388,7 @@ The goal of this blog post is to gain some intuition about these equations by de
             <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
               
                 <a
-                  href="/websiteplayground/pr-preview/pr-5/posts/"
+                  href="/arnostrouwen.com/pr-preview/pr-5/posts/"
                   title=""
                   
                   ><span
@@ -404,7 +404,7 @@ The goal of this blog post is to gain some intuition about these equations by de
             <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
               
                 <a
-                  href="/websiteplayground/pr-preview/pr-5/ssi/"
+                  href="/arnostrouwen.com/pr-preview/pr-5/ssi/"
                   title=""
                   
                   ><span
@@ -420,7 +420,7 @@ The goal of this blog post is to gain some intuition about these equations by de
             <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
               
                 <a
-                  href="/websiteplayground/pr-preview/pr-5/about/"
+                  href="/arnostrouwen.com/pr-preview/pr-5/about/"
                   title="About me"
                   
                   ><span
@@ -436,7 +436,7 @@ The goal of this blog post is to gain some intuition about these equations by de
             <li class="group mb-1 sm:mb-0 sm:me-7 sm:last:me-0.5">
               
                 <a
-                  href="/websiteplayground/pr-preview/pr-5/cv.pdf"
+                  href="/arnostrouwen.com/pr-preview/pr-5/cv.pdf"
                   title=""
                   
                   ><span
@@ -688,7 +688,7 @@ $$</p>
 \end{align*}$$</p>
 <p>These are the same equations you find in the documentation of DifferentialEquations.jl <a href="https://docs.sciml.ai/SciMLSensitivity/stable/sensitivity_math/" target="_blank" rel="noreferrer">[4]</a>.
 This, however, only gives us an intuition behind the equations for continuous time systems.
-In <a href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/posts/adjoint-sensitivity2/">part 2</a> we will see if a more rigorous version of this argument can be made for continuous time systems.</p>
+In <a href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/posts/adjoint-sensitivity2/">part 2</a> we will see if a more rigorous version of this argument can be made for continuous time systems.</p>
 <h1 id="references" class="relative group">References </h1><ol>
 <li><a href="https://ieeexplore.ieee.org/abstract/document/9622796" target="_blank" rel="noreferrer">Y. Ma, V. Dixit, M. J. Innes, X. Guo and C. Rackauckas, &ldquo;A Comparison of Automatic Differentiation and Continuous Sensitivity Analysis for Derivatives of Differential Equation Solutions,&rdquo; 2021 IEEE High Performance Extreme Computing Conference (HPEC), 2021, pp. 1-9. </a></li>
 <li><a href="https://book.sciml.ai/notes/10-Basic_Parameter_Estimation-Reverse-Mode_AD-and_Inverse_Problems/" target="_blank" rel="noreferrer">Lecture 10 of the Parallel Computing and Scientific Machine Learning course</a></li>
@@ -731,12 +731,12 @@ In <a href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pos
         alt="Arno Strouwen"
         loading="lazy" decoding="async"
         
-          src="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pfp_hu_32ed8f0f2c8c45db.png" srcset="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pfp_hu_31954227e4a23f7d.png 330w,https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pfp_hu_32ed8f0f2c8c45db.png 660w
+          src="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/pfp_hu_32ed8f0f2c8c45db.png" srcset="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/pfp_hu_31954227e4a23f7d.png 330w,https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/pfp_hu_32ed8f0f2c8c45db.png 660w
           
-            ,https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pfp.png 800w
+            ,https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/pfp.png 800w
           
           
-            ,https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pfp.png 800w
+            ,https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/pfp.png 800w
           "
           sizes="100vw"
         
@@ -818,7 +818,7 @@ In <a href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pos
       <div class="flex justify-between pt-3">
         <span>
           
-            <a class="group flex" href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/posts/dynamic-experimental-design/">
+            <a class="group flex" href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/posts/dynamic-experimental-design/">
               <span
                 class="me-2 text-neutral-700 transition-transform group-hover:-translate-x-[2px] group-hover:text-primary-600 dark:text-neutral dark:group-hover:text-primary-400"
                 ><span class="ltr:inline rtl:hidden">&larr;</span
@@ -840,7 +840,7 @@ In <a href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pos
         </span>
         <span>
           
-            <a class="group flex text-right" href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/posts/adjoint-sensitivity2/">
+            <a class="group flex text-right" href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/posts/adjoint-sensitivity2/">
               <span class="flex flex-col">
                 <span
                   class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
@@ -942,7 +942,7 @@ In <a href="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/pos
 <div
   id="search-wrapper"
   class="invisible fixed inset-0 z-50 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
-  data-url="https://arnostrouwen.github.io/websiteplayground/pr-preview/pr-5/"
+  data-url="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-5/"
 >
   <div
     id="search-modal"
