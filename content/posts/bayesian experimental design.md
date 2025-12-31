@@ -59,5 +59,3 @@ $$
 p(y|D)  = \int p(y, \theta|D) d\theta.
 $$
 Thus, unfortunately, a nested numerical integration technique will still be required to generate Bayesian optimal designs.
-
-These notes are continued in [adaptive bayesian experimental design]({{< ref "adaptive bayesian experimental design" >}}).
