@@ -16,11 +16,6 @@
   weight = 1
 
 [[main]]
-  name = "Small Sample Inference"
-  pageRef = "ssi"
-  weight = 2
-
-[[main]]
   name = "About Me"
   pageRef = "about"
   weight = 3
