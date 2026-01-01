@@ -1,0 +1,85 @@
+{{/* Mermaid */}}
+{{ if .Page.HasShortcode "mermaid" }}
+{{ $mermaidLib := resources.Get "lib/mermaid/mermaid.min.js" }}
+{{ $mermaidConfig := resources.Get "js/mermaid.js" }}
+{{ $mermaidConfig := $mermaidConfig | resources.Minify }}
+{{ $mermaidJS := slice $mermaidLib $mermaidConfig | resources.Concat "js/mermaid.bundle.js" | resources.Fingerprint
+"sha512" }}
+<script defer type="text/javascript" src="{{ $mermaidJS.RelPermalink }}"
+    integrity="{{ $mermaidJS.Data.Integrity }}"></script>
+{{ end }}
+{{/* Chart */}}
+{{ if .Page.HasShortcode "chart" }}
+{{ $chartLib := resources.Get "lib/chart/chart.umd.js" }}
+{{ $chartConfig := resources.Get "js/chart.js" }}
+{{ $chartConfig := $chartConfig | resources.Minify }}
+{{ $chartJS := slice $chartLib $chartConfig | resources.Concat "js/chart.bundle.js" | resources.Fingerprint "sha512" }}
+<script defer type="text/javascript" src="{{ $chartJS.RelPermalink }}"
+    integrity="{{ $chartJS.Data.Integrity }}"></script>
+{{ end }}
+{{/* Katex */}}
+{{ $hasKatex := .Page.HasShortcode "katex" }}
+{{ if not $hasKatex }}
+{{ range .Site.RegularPages }}
+{{ if .HasShortcode "katex" }}
+{{ $hasKatex = true }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ if $hasKatex }}
+{{ $katexCSS := resources.Get "lib/katex/katex.min.css" }}
+{{ $katexCSS := $katexCSS | resources.Fingerprint "sha512" }}
+<link type="text/css" rel="stylesheet" href="{{ $katexCSS.RelPermalink }}" integrity="{{ $katexCSS.Data.Integrity }}" />
+{{ $katexJS := resources.Get "lib/katex/katex.min.js" }}
+{{ $katexJS := $katexJS | resources.Fingerprint "sha512" }}
+{{ $katexRenderJS := resources.Get "lib/katex/auto-render.min.js" }}
+{{ $katexRenderJS := $katexRenderJS | resources.Fingerprint "sha512" }}
+<script>
+    (function () {
+        var katexDelimiters = [
+            { left: "$$", right: "$$", display: true },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true }
+        ];
+
+        function renderKatex() {
+            if (typeof renderMathInElement === "function") {
+                renderMathInElement(document.body, { delimiters: katexDelimiters });
+            }
+        }
+
+        function loadScript(src, onload) {
+            var script = document.createElement("script");
+            script.src = src;
+            script.onload = onload;
+            document.head.appendChild(script);
+        }
+
+        // Wait for DOM to be ready, then load KaTeX scripts
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", init);
+        } else {
+            init();
+        }
+
+        function init() {
+            // Save and temporarily disable AMD define to force global registration
+            var oldDefine = window.define;
+            window.define = undefined;
+
+            loadScript("{{ $katexJS.RelPermalink }}", function () {
+                loadScript("{{ $katexRenderJS.RelPermalink }}", function () {
+                    // Restore define
+                    window.define = oldDefine;
+                    // Render math
+                    renderKatex();
+                });
+            });
+        }
+    })();
+</script>
+{{ $katexFonts := resources.Match "lib/katex/fonts/*" }}
+{{ range $katexFonts }}
+{{ .Publish }}
+{{ end }}
+{{ end }}
