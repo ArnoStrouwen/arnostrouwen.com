@@ -2,3 +2,7 @@ public
 resources
 .hugo_build.lock
 /.quarto/
+# CV: only the source is tracked, CI builds the PDF and copies it to static/
+cv/*
+!cv/cv.tex
+static/cv.pdf

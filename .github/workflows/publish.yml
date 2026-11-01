@@ -11,6 +11,16 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
+    - name: Build CV
+      uses: xu-cheng/latex-action@v4
+      with:
+        root_file: cv.tex
+        working_directory: cv
+        texlive_version: '2023'
+    - name: Check the CV is 2 pages and add it to the site
+      run: |
+        grep -q 'Output written on cv.pdf (2 pages' cv/cv.log || { echo "::error::cv.pdf is not 2 pages"; exit 1; }
+        cp cv/cv.pdf static/cv.pdf
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
       with:
