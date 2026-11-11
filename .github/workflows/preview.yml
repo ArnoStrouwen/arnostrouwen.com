@@ -25,6 +25,7 @@ jobs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
       with:
+        hugo-version: '0.153.5'
         extended: true
     - name: Build
       if: github.event.action != 'closed'
