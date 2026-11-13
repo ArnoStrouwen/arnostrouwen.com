@@ -1,0 +1,102 @@
+\documentclass[10pt,a4paper,roman]{moderncv}   % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+
+% moderncv themes
+\moderncvstyle{classic} % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+\moderncvcolor{blue} % color options 'blue', 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+%\renewcommand{\familydefault}{\rmdefault}    % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
+%\nopagenumbers{}
+
+% adjust the page margins
+\usepackage[a4paper, total={7.5in, 10.5in},scale=0.75]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}           % if you want to change the width of the column with the dates
+%\setlength{\makecvtitlenamewidth}{10cm}      % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+
+% personal data
+\firstname{Arno}
+\familyname{Strouwen}
+\title{Statistical Consultant \\ {\large Curriculum Vitae} \\ {\large November 2026}}
+\email{contact@arnostrouwen.com}
+\homepage{https://arnostrouwen.com}
+\extrainfo{https://github.com/ArnoStrouwen\\https://linkedin.com/in/arno-strouwen/}            % optional, 
+%\quote{}                 % optional, remove the line if not wanted
+
+
+\begin{document}
+\makecvtitle
+\vspace{-20pt}
+\section{Profile}
+\cvitem{}{Statistician specialized in experimental design for dynamic systems and adaptive Bayesian design.
+Consulting through Strouwen Statistics on research-driven projects in industry and academia.}
+
+\section{Experience}
+\cventry{2022--Present}{Founder and Principal Consultant}{}{Strouwen Statistics}{}{}
+\cvlistitem {Consultancy in experimental design, statistical modelling, and scientific computing in Julia, focused on optimal data gathering strategies.}
+
+\cventry{2025--Present}{Senior Product Engineer}{}{PumasAI}{Contract through Strouwen Statistics}{}
+\cvlistitem {Development of software for noncompartmental analysis (NCA), bioequivalence, in vitro--in vivo correlation (IVIVC), and PBPK and PBBM modelling.}
+\cvlistitem {\textbf{NCA}: validated against Phoenix WinNonlin, the industry reference, on \textbf{248 concentration profiles} covering \textbf{74 NCA parameters}.}
+\cvlistitem {Contributing to the JuliaStats open-source organization.}
+
+\cventry{2022--Present}{Lecturer}{}{KU Leuven}{Substitute for Prof. Peter Goos}{}
+\cvlistitem {Teaching the course \textbf{Experimental Design} in the Master of Statistics and Data Science, including a new lecture on \textbf{Bayesian optimization}.}
+
+\cventry{2022--2025}{Research Scientist}{}{JuliaHub}{Contract through Strouwen Statistics}{}
+\cvlistitem {Successfully onboarded several leading pharmaceutical companies to the PumasQSP software.}
+\cvlistitem {Significant contributor to the SciML documentation and to \textbf{SciMLSensitivity}, which computes derivatives of differential equation solutions with respect to their parameters.}
+
+\cventry{2021--2022}{Postdoc Statistician}{}{The Janssen Pharmaceutical Companies of Johnson \& Johnson}{}{}
+\cvlistitem {\textbf{Model Based Design of Experiment}: designing \textbf{10x accelerated stability studies} to precisely predict the \textbf{shelf life} of pharmaceutical drugs and vaccines.}
+\cvlistitem {\textbf{Bayesian Optimization}: high-throughput optimization of chemical reactions, supervising a PhD intern.}
+\cvlistitem {\textbf{Probabilistic Programming}: Bayesian Non-linear \textbf{mixed effect modelling} of powder flowability.}
+
+\cventry{2016--2021}{Ph.D. Fellow Strategic Basic Research}{}{Research Foundation Flanders}{}{}
+\cvlistitem {\textbf{Optimal Experimental Design for Dynamic Systems:}
+	Developing novel robust experimental design methodology for dynamic systems with both measurement and process noise.}
+\cvlistitem {\textbf{Metabolism of Pear During Hypoxia}: Designing informative experiments to study respiration and fermentation characteristics of pear fruit.}
+
+\section{Skills}
+\cvitem{DOE}{\textbf{Model-Based Design}, Optimal Design, Screening Designs, Response Surface Designs, Mixture Experiments, Blocked and Split-Plot Experiments, Bayesian Experimental Design, Adaptive Design, Bayesian Optimization}
+\cvitem{ML}{\textbf{Deep Learning}, Reinforcement Learning, Normalizing Flows, Diffusion, Variational Bayes, Amortized Inference, Gaussian Processes, Probabilistic and Differentiable Programming}
+\cvitem{Statistics}{\textbf{Bayesian Statistics}, Linear and Nonlinear Mixed Effects Models, Small Sample Inference, Bayesian and Kalman Filtering, Uncertainty Quantification, Information Theory}
+\cvitem{SciML}{\textbf{Scientific Computing}, Differential Equations, Sensitivity Analysis, Numerical Optimization, Learning Missing Physics, Universal Differential Equations, Symbolic Regression}
+\cvitem{Pharma}{\textbf{Pharmacometrics}, NCA, Bioequivalence, IVIVC, PBPK, PBBM, Stability Studies, Reaction Engineering}
+\cvitem{Programming}{\textbf{Julia} (Enzyme.jl, Reactant.jl, Lux.jl, SciML, JuliaStats), JMP; \textit{basic knowledge: Python, SQL, R, Matlab}}
+
+\pagebreak
+\section{Peer Reviewed Publications}
+\cventry{2026}{Deep Adaptive Bayesian Screening.}{}{}{}{Jade Lejeune Herman, Arno Strouwen, Johan A. K. Suykens and Peter Goos, \textit{Transactions on Machine Learning Research}, accepted, arXiv 2607.16927.}
+\cventry{2026}{Deep Adaptive Model-Based Design of Experiments.}{}{}{}{Arno Strouwen and Sebastian Miclu\c{t}a-C\^ampeanu, \textit{CDC 2026}, to appear, arXiv 2603.16146.}
+\cventry{2026}{Bayesian Symbolic Regression for Missing Physics.}{}{}{}{Arno Strouwen, \textit{IFAC World Congress 2026}, arXiv 2603.14918.}
+\cventry{2025}{Experimental Design for Missing Physics.}{}{}{}{Arno Strouwen and Sebastian Miclu\c{t}a-C\^ampeanu, \textit{DYCOPS 2025}.}
+\cventry{2023}{Adaptive and Robust Experimental Design for Linear Dynamical Models using Kalman filter.}{}{}{}{Arno Strouwen, Bart Nicolaï and Peter Goos, \textit{Statistical Papers}, 64 (4).}
+\cventry{2022}{Robust Dynamic Experiments for the Precise Estimation of Respiration and Fermentation Parameters of Fruit and Vegetables.}{}{}{}{Arno Strouwen, Bart Nicolaï and Peter Goos, \textit{PLOS Computational Biology}, 18 (1).}
+\cventry{2021}{D- and I-optimal design of multi-factor industrial experiments with ordinal outcomes.}{}{}{}{Karel Van Brantegem, Arno Strouwen and Peter Goos, \textit{Chemometrics and Intelligent Laboratory Systems}, 221.}
+\cventry{2019}{A Note on the Output of a Coordinate-Exchange Algorithm for Optimal Experimental Design}{}{}{}{Arno Strouwen and Peter Goos, \textit{Chemometrics and Intelligent Laboratory Systems}, 192.}
+\cventry{2019}{Optimizing Oxygen Input Profiles for Efficient Estimation of Michaelis-Menten Respiration Models.}{}{}{}{Arno Strouwen, Bart Nicolaï and Peter Goos, \textit{Food and Bioprocess Technology}, 12 (5), 769-780.}
+
+\section{Selected Presentations}
+\cventry{2026}{Deep Adaptive Design of Experiments for Dynamical Systems.}{}{}{}{JuliaCon 2026 and CDC 2026}
+\cventry{2026}{InVitroInVivoCorrelation.jl: A Modular Julia Package for Level A IVIVC.}{}{}{}{PAGE 2026 (poster) and NCS 2026}
+\cventry{2026}{Bayesian Optimization as Design of Experiments.}{}{}{}{ENBIS-26}
+\cventry{2026}{From Optimal Designs to Optimal Policies.}{}{}{}{Tutorial, mODa 14}
+\cventry{2025}{Small Sample Inference for Mixed Models.}{}{}{}{ENBIS-25, JuliaCon 2025}
+\cventry{2025}{Experimental Design for Missing Physics.}{}{}{}{ENBIS-25, DYCOPS 2025, JuliaCon 2025 and Leuven Statistics Days 2025}
+\cventry{2024}{Bayesian non-linear mixed effects model for safer powder storage.}{}{}{}{JuliaCon 2024, ENBIS-24, and NCS 2024}
+\cventry{2023}{Optimal Design for Model Autocompletion.}{}{}{}{ENBIS-23}
+\cventry{2023}{Adaptive and Robust Experimental Design for Linear Dynamical Models using Kalman filter.}{}{}{}{mODa 13}
+\cventry{2022}{Model Based Experimental Design for Accelerated Small Molecule Stability Studies}{}{}{}{NCS 2022}
+%\cventry{2019}{Bayesian Filtering Techniques for Optimal Experimental Design}{}{}{}{University of Southampton Seminar}
+%\cventry{2018}{Towards More Efficient Experimentation in Post Harvest Storage}{}{}{}{Marine Research Institute, Spanish Research Council (IIM-CSIC) Seminar}
+\cventry{2018}{Optimizing an Oxygen Input profile to Estimate Michaelis-Menten Respiration Parameters}{}{}{}{ENBIS Spring Meeting 2018}
+\cventry{2017}{Optimal Design of Experiments for Non-Linear Models using JMP}{}{}{}{KU Leuven Seminar}
+
+\section{Education}
+\cventry{2022--2023}{Selected graduate coursework in Statistics and Data Science}{}{UHasselt, Belgium}{}{}{}
+%\cvlistitem {\textbf{Deep Learning with Neural Networks}, Databases, Topological Data Analysis}
+
+\cventry{2016--2021}{Ph.D. in Bio-science engineering}{}{KU Leuven, Belgium}{}{}{}
+\cvlistitem {\textbf{Thesis:} ``\textit{Optimal Design of Dynamic Experiments in Bioscience Engineering}\/''{}
+$\qquad \qquad \qquad \qquad$	\break under supervision of \textbf{Prof. Peter Goos} and \textbf{Prof. Bart Nicolaï} }
+
+\cventry{2011--2016}{B.Sc.\&M.Sc. in Bioscience-engineering}{Bio-systems engineering}{magna cum laude, KU Leuven, Belgium}{}{}{}
+\end{document}
