@@ -138,7 +138,7 @@
     
     
     "mainEntityOfPage": "true",
-    "wordCount": "235"
+    "wordCount": "271"
   }
   </script>
     
@@ -183,6 +183,10 @@
   
   
   
+
+
+
+
 
 
 
@@ -591,7 +595,7 @@
       
       <div class="min-h-0 min-w-0 max-w-prose grow">
         <p>At ENBIS-26 in Florence, I gave a talk on how Bayesian optimization fits into the design of experiments.</p>
-<p>The talk grew out of a lecture on Bayesian optimization that I added to the Experimental Design course at KU Leuven.
+<p>The talk grew out of a <a href="https://github.com/arno-papers/bayesian-optimization-doe/blob/main/lecture/slides.pdf" target="_blank" rel="noreferrer">lecture on Bayesian optimization</a> that I added to the <a href="https://lstat.kuleuven.be/training/coursedescriptions/experimental_designnew" target="_blank" rel="noreferrer">Experimental Design course</a> at KU Leuven.
 Classical design of experiments and Bayesian optimization are usually taught as two fixed recipes:
 a low-order polynomial with D- or I-optimal designs,
 versus a Gaussian process with an acquisition function, adding one run at a time.
@@ -600,13 +604,15 @@ These choices can be recombined freely.
 For example, a quadratic model can be used to locate an optimum, by designing for the precision of its stationary point.</p>
 <p>Bayesian experimental design chooses runs to reduce the entropy of any function of the model parameters.
 When that function is the location of the optimum, we get Bayesian optimization, in the form of entropy search.
+Bayesian optimization is then a special case of the Bayesian experimental design from my <a href="https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/moda14-tutorial/">mODa 14 tutorial</a>,
+so the adaptive design policies from that tutorial apply to it as well.
 From this point of view, the Gaussian process is a prior, and it should be defended like any other prior.
 A stationary Gaussian process is a reasonable prior for ore concentrations, which is where kriging comes from,
 but less obviously for the yield of a manufacturing process.
 Universal kriging combines the two:
 the second-order model goes into the mean function,
 and the Gaussian process only has to explain what the polynomial misses.</p>
-<p><a href="/files/enbis26-bayesian-optimization-doe.pdf">The slides are available here.</a></p>
+<p>The <a href="https://github.com/arno-papers/bayesian-optimization-doe/blob/main/enbis26/slides.pdf" target="_blank" rel="noreferrer">slides</a> and the <a href="https://github.com/arno-papers/bayesian-optimization-doe/tree/main/enbis26" target="_blank" rel="noreferrer">source to generate them</a> are on GitHub.</p>
       </div>
     </section>
     <footer class="max-w-prose pt-8 print:hidden">

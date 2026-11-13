@@ -30,6 +30,13 @@
       <description>&lt;p&gt;At mODa 14, I gave a tutorial on modern Bayesian experimental design.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Notes on variational Bayesian experimental design</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/variational-bayesian-experimental-design/</link>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/variational-bayesian-experimental-design/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;At the end of &lt;a href=&#34;https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/bayesian-experimental-design/&#34;&gt;Bayesian experimental design&lt;/a&gt;,&#xA;we were left with a nested integral.&#xA;Variational methods replace the inner integral by an optimization problem.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>New Conference Paper: Experimental Design for Missing Physics</title>
       <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/experimental-design-for-missing-physics/</link>
       <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>

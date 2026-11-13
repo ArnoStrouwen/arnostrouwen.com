@@ -30,6 +30,13 @@
       <description>&lt;p&gt;At mODa 14, I gave a tutorial on modern Bayesian experimental design.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Notes on variational Bayesian experimental design</title>
+      <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/variational-bayesian-experimental-design/</link>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/variational-bayesian-experimental-design/</guid>
+      <description>&lt;p&gt;&#xA;&#xA;At the end of &lt;a href=&#34;https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/bayesian-experimental-design/&#34;&gt;Bayesian experimental design&lt;/a&gt;,&#xA;we were left with a nested integral.&#xA;Variational methods replace the inner integral by an optimization problem.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>New Conference Paper: Experimental Design for Missing Physics</title>
       <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/experimental-design-for-missing-physics/</link>
       <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
@@ -111,7 +118,7 @@
       <link>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/about/</guid>
-      <description>&lt;p&gt;I am a statistical consultant focused on experimental design and other optimal data gathering techniques, particularly for dynamic systems.&lt;/p&gt;&#xA;&lt;p&gt;Often, researchers will perform experiments and only  talk to a statistician afterwards.&#xA;But statisticians are not only useful for data analysis.&#xA;Much time and effort can be saved by carefully planning an experiment.&#xA;Every measurement setup has its own unique details.&#xA;I help other researchers by constructing optimal experiments, custom made for their own measurement setup, goals, and budgetary constraints.&lt;/p&gt;</description>
+      <description>&lt;p&gt;I am a statistician specialized in experimental design: deciding which experiments to run.&#xA;Often, researchers perform their experiments first and only talk to a statistician afterwards.&#xA;Much time and effort can be saved by planning the experiment together beforehand,&#xA;with a design made for the specific measurement setup, goals, and budget.&lt;/p&gt;&#xA;&lt;p&gt;My research focuses on dynamic systems, where the model is a set of differential equations and the design is a control profile over time,&#xA;and on adaptive Bayesian experimental design, where the next experiment is chosen based on the measurements gathered so far.&#xA;More recently, I have started looking at experimental design for improving AI models, such as world models.&#xA;New papers and talks are announced on the &lt;a href=&#34;https://arnostrouwen.github.io/arnostrouwen.com/pr-preview/pr-11/posts/&#34;&gt;blog&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
