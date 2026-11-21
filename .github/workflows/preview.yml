@@ -16,7 +16,7 @@ jobs:
       with:
         root_file: cv.tex
         working_directory: cv
-        texlive_version: '2023'
+        texlive_version: '2026'
     - name: Check the CV is 2 pages and add it to the site
       if: github.event.action != 'closed'
       run: |
