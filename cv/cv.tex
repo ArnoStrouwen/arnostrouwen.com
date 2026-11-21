@@ -1,8 +1,12 @@
 \documentclass[10pt,a4paper,roman]{moderncv}   % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
-% moderncv themes
-\moderncvstyle{classic} % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+% moderncv themes (since moderncv 2.6 the colour must be loaded before the style)
 \moderncvcolor{blue} % color options 'blue', 'orange', 'green', 'red', 'purple', 'grey' and 'black'
+\moderncvstyle{classic} % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
+% keep the pre-2.6 name look: moderncv now uses T1 fonts (the 34pt name size takes effect) and a two-tone grey name
+\renewcommand*{\namefont}{\fontsize{24.88}{36}\mdseries\upshape}
+\colorlet{firstnamecolor}{color0}
+\colorlet{lastnamecolor}{color0}
 %\renewcommand{\familydefault}{\rmdefault}    % to set the default font; use '\sfdefault' for the default sans serif font, '\rmdefault' for the default roman one, or any tex font name
 %\nopagenumbers{}
 
@@ -23,7 +27,7 @@
 
 \begin{document}
 \makecvtitle
-\vspace{-20pt}
+\vspace{-10pt}
 \section{Profile}
 \cvitem{}{Statistician specialized in experimental design for dynamic systems and adaptive Bayesian design.
 Consulting through Strouwen Statistics on research-driven projects in industry and academia.}
